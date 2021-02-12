@@ -1,0 +1,252 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Problem setting &#8212; Scientific-Computing 0.1.0 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Welcome to Scientific-Computing’s documentation!" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="problem-setting">
+<h1>Problem setting<a class="headerlink" href="#problem-setting" title="Permalink to this headline">¶</a></h1>
+<p>Classic optimization methods such as gradient descent and quasi-newton methods perform well
+for unimodal optimisation. However, these classic methods fail to find the global optimum
+whenever the function to optimise has discontinuities or multiple local optima.</p>
+<img alt="_images/GB_Griewank.png" src="_images/GB_Griewank.png" />
+<p>Below are some examples of these functions that are widely used to test optimisation algorithms.</p>
+<p>Figure 1</p>
+<img alt="_images/Griewank_Function.png" src="_images/Griewank_Function.png" />
+<ol class="arabic simple">
+<li><p>Griewank Function</p></li>
+</ol>
+<img alt="_images/Ackley_function.png" src="_images/Ackley_function.png" />
+<ol class="arabic simple" start="2">
+<li><p>Ackley Function</p></li>
+</ol>
+<img alt="_images/Schaeffer_Function.png" src="_images/Schaeffer_Function.png" />
+<ol class="arabic simple" start="3">
+<li><p>Schaeffer Function</p></li>
+</ol>
+<p>What optimisation algorithm when the objective function is not differentiable?</p>
+<div class="section" id="derivative-free-optimisation">
+<h2>Derivative free optimisation<a class="headerlink" href="#derivative-free-optimisation" title="Permalink to this headline">¶</a></h2>
+<p>Several derivative free optimisation also called black-box optimisation aim to solve the above problem.
+The three main classes of black-box algorithm are :</p>
+<ul class="simple">
+<li><p>Direct Algorithms</p></li>
+<li><p>Stochastic Algorithms</p></li>
+<li><p>Population Algorithms</p></li>
+</ul>
+<p>The focus of this project will be on a population algorithm called Particle Swarm Optimisation.</p>
+</div>
+</div>
+<div class="section" id="particle-swarm-optimisation">
+<h1>Particle Swarm Optimisation<a class="headerlink" href="#particle-swarm-optimisation" title="Permalink to this headline">¶</a></h1>
+<p>Particle swarm optimization (PSO), first proposed by Kennedy and Eberhart in 1995 is one of the most popular swarm-intelligence-based algorithms.
+This relatively new, modern, and powerful method of optimization has been empirically shown to perform well on many of optimization problems from physical processes to economics.
+PSO takes its inspiration in the social behavior of animals. It is based on group communication and sharing of individual knowledge when a group of birds or insects searches food.
+Each member adjusts its movement according to self experience and social interaction. If any member discovers a desirable path to go, the rest of the members will follow quickly.
+Thus, PSO is a simple, flexible and efficient algorithm compared to other optimisation methods.</p>
+<div class="section" id="pso-algorithm">
+<h2>PSO Algorithm<a class="headerlink" href="#pso-algorithm" title="Permalink to this headline">¶</a></h2>
+<p>PSO algorithm searches the space of an objective function by adjusting the trajectories of individual agents, called particles, as the piecewise paths formed by positional vectors
+in a quasi-stochastic manner. Each particle is attracted toward the position of the current global best  and its own best location in history, while at the same time it has a tendency
+to move randomly. When a particle finds a location that is better than any previously found locations, updates that location as the new current best for particle i.
+There is a current best for all n particles at any time t during iterations. The aim is to find the global best among all the current best solutions until the objective no longer improves
+or after a certain number of iterations.</p>
+<img alt="_images/PSO_picture.png" src="_images/PSO_picture.png" />
+<p>The update of particle’s position is given by:</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[x^{i}_{k} + 1 =  x^{i}_{k} + v^{i}_{k+1} + ∆t\]</div>
+</div></blockquote>
+<p>The velocity of the particle is given by:</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[v^{i}_{k+1} = w v^{i}_{k} + c_{1} r_{1} \frac{(p^{i}_{k} − x^{i}_{k})}{∆t} + c_{2} r_{2} \frac{(p^{g}_{k} − x^{i}_{k})}{∆t}\]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(r_{1}\)</span> and <span class="math notranslate nohighlight">\(r_{2}\)</span> are random numbers in the interval [0,1]</p></li>
+<li><p><span class="math notranslate nohighlight">\(p^{i}_{k}\)</span> is particle i best position</p></li>
+<li><p><span class="math notranslate nohighlight">\(p^{g}_{k}\)</span> is the swarm’s best particle position at iteration k</p></li>
+<li><p><span class="math notranslate nohighlight">\(c_{1}\)</span> is the parameter for the confidence in itself and <span class="math notranslate nohighlight">\(c_{2}\)</span> is the social parameter</p></li>
+<li><p>w is the inertia weight</p></li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="results">
+<h1>Results<a class="headerlink" href="#results" title="Permalink to this headline">¶</a></h1>
+<p>Figure 2</p>
+<ul class="simple">
+<li><ol class="loweralpha simple">
+<li><p>Ackley function</p></li>
+</ol>
+</li>
+</ul>
+<img alt="_images/PSO_ackley.gif" src="_images/PSO_ackley.gif" />
+<img alt="_images/Convergence_ackley.png" src="_images/Convergence_ackley.png" />
+<ul class="simple">
+<li><ol class="loweralpha simple" start="2">
+<li><p>Griewank function</p></li>
+</ol>
+</li>
+</ul>
+<img alt="_images/PSO_griewank.gif" src="_images/PSO_griewank.gif" />
+<img alt="_images/Convergence_Griewank.png" src="_images/Convergence_Griewank.png" />
+<ul class="simple">
+<li><ol class="loweralpha simple" start="3">
+<li><p>Schaeffer function</p></li>
+</ol>
+</li>
+</ul>
+<img alt="_images/PSO_schaeffer.gif" src="_images/PSO_schaeffer.gif" />
+<img alt="_images/Convergence_Schaeffer.png" src="_images/Convergence_Schaeffer.png" />
+<p>We observe that Nedler-Mead and BFGS converge faster towards the global minimum than PSO
+if the initial guess is close to the global minimum. Otherwise, it gets stuck in a local minimum (Figure 2a).</p>
+<div class="section" id="parameter-tuning">
+<h2>Parameter tuning<a class="headerlink" href="#parameter-tuning" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Population size</p></li>
+</ul>
+<p>The algorithm works well for a small number of particles n=10.</p>
+<ul class="simple">
+<li><p>Weight factor</p></li>
+</ul>
+<p>From the convergence plots and animations above, we see that the particles overshoot the best regions because of too much momentum.
+This is likely due to the fixed inertia. In order to control global search, it is better to update dynamically the inertia weight factor.
+A larger inertia weight factor tends towards global exploration, while a smaller inertia weight factor tends toward fine-tuning
+of the local search area.</p>
+<p>The adaptive inertia weight factor is defined as:</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[\{ w_{min} + \frac{w_{max}-w_{min}}{f_{avg}-f_{min}} , f &lt; f_{avg}\]</div>
+</div></blockquote>
+<div class="math notranslate nohighlight">
+\[\ w_ {max}                                          , f &gt; f_{avg}\]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(w_{max}\)</span> and <span class="math notranslate nohighlight">\(w_{min}\)</span> denote the maximum and minimum of w</p></li>
+<li><p>f is the current objective value of the particle</p></li>
+<li><p><span class="math notranslate nohighlight">\(f_{avg}\)</span> and <span class="math notranslate nohighlight">\(f_{min}\)</span> are the average and minimum objective values of all particles</p></li>
+</ul>
+<p>w varies such that particles with low objective values can be protected while particles with objective values over average
+will be disrupted ( <a class="reference external" href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;arnumber=785511">Shi and Eberhart</a> ).</p>
+<p>Below is the result for the Ackley function after implementing the adaptive weight factor.</p>
+<ul class="simple">
+<li><p>Unconstrained PSO</p></li>
+</ul>
+<img alt="_images/Convergence_ackley.png" src="_images/Convergence_ackley.png" />
+<ul class="simple">
+<li><p>PS0 with adaptive weight factor update</p></li>
+</ul>
+<img alt="_images/ackley_updated_weight.png" src="_images/ackley_updated_weight.png" />
+<p>We observe that the particles converge faster towards the global minimum with the dynamic weight factor update.
+There is a better balance between exploration and exploitation.</p>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Scientific-Computing</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Problem setting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#derivative-free-optimisation">Derivative free optimisation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#particle-swarm-optimisation">Particle Swarm Optimisation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#pso-algorithm">PSO Algorithm</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#results">Results</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#parameter-tuning">Parameter tuning</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">Welcome to Scientific-Computing’s documentation!</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Emmanuelle Bourigault.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.2.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/doc.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
