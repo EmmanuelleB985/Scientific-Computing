@@ -1,6 +1,6 @@
 # Scientific-Computing
 Welcome to the derivative free optimisation project.
-Please read [here](file:///home/sabsr3/Documents/Scientific-Computing/documentation/build/html/doc.html) for further documentation.
+Please read [here](file:///home/sabsr3/Documents/Scientific-Computing/documentation/build/html/index.html) for further documentation.
 # Prerequisites
 
 Ensure you have met the following requirements
