@@ -20,8 +20,6 @@ import matplotlib.animation as animation
 
 
 
-
-
 def optimize(x0, f, m):
 
 	"""
@@ -49,7 +47,7 @@ n_iterations = 19
 
 #%matplotlib inline
 plt.style.use('bmh')
-#@timing
+
 def pso(func, bounds, particle_size=10, inertia=0.5, w_min = 0.6, w_max = 0.7, phi_p=0.8, phi_g=0.9, 
         max_vnorm=10, n_iterations=500, func_name=None):
 

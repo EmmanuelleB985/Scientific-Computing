@@ -109,11 +109,8 @@ def visualise(f=None, history=None, bounds=None, minima=None, func_name=''):
 
 for f in [schaeffer, griewank, ackley_function]:
 
-        start = timeit.timeit()
 
         history = pso(f, bounds = [[-5,5],[-5,5]], particle_size = 20, inertia = 0.5,w_min = 0.6, w_max = 0.7, n_iterations = 20, func_name = '')
-
-
 
         print('global best:',history['global_best'][-1], ', global best position:', history['global_best'][-1])
 
@@ -122,7 +119,6 @@ for f in [schaeffer, griewank, ackley_function]:
 
         # initial guess 
         x0=[(-2,2)] 
-
 
 
         for model in ['nelder-mead','bfgs']:
@@ -134,13 +130,11 @@ for f in [schaeffer, griewank, ackley_function]:
                 
                     xi,yi,fi = optimize(x0,f,model)
                     
-
                     
                 if model == 'bfgs' and a == True:
                     
 
-                    xi2,yi2,fi2 = optimize(x0,f,model)
-        
+                    xi2,yi2,fi2 = optimize(x0,f,model)   
             
                     
         #Plot convergence
