@@ -1,6 +1,6 @@
 # Scientific-Computing
 Welcome to the derivative free optimisation project.
-Please read [here](file:///home/sabsr3/Documents/Scientific-Computing/documentation/build/html/index.html) for further documentation.
+Please read [file:///home/sabsr3/Documents/Scientific-Computing/documentation/build/html/index.html] for further documentation.
 # Prerequisites
 
 Ensure you have met the following requirements
@@ -8,7 +8,7 @@ Ensure you have met the following requirements
 * You have installed Python 3.5 or latest versions [3.6, 3.7, 3.8]
 * OS supported: Windows, Linux, Mac
 
-# PK Project Installation
+# Project Installation
 
 To install the PK project, follow the steps:
 
