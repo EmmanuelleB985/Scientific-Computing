@@ -54,13 +54,13 @@ PSO Algorithm
 
 PSO algorithm searches the space of an objective function by adjusting the trajectories of individual agents, called particles, as the piecewise paths formed by positional vectors 
 in a quasi-stochastic manner. Each particle is attracted toward the position of the current global best  and its own best location in history, while at the same time it has a tendency
-to move randomly. When a particle finds a location that is better than any previously found locations, updates that location as the new current best for particle i. 
+to move randomly. When a particle finds a location that is better than any previously found locations, PSO updates that location as the new current best for particle i. 
 There is a current best for all n particles at any time t during iterations. The aim is to find the global best among all the current best solutions until the objective no longer improves
 or after a certain number of iterations. 
 
 .. image:: ../source/data/PSO_picture.png 
 
-The update of particle’s position is given by:
+The update of the particle position is given by:
 
  .. math:: 
 
@@ -104,12 +104,13 @@ Figure 2
 .. image:: ../source/data/Convergence_Schaeffer.png
  
 
-We observe that Nedler-Mead and BFGS converge faster towards the global minimum than PSO 
+We observe that Nelder-Mead (direct derivative free algorithm) and BFGS (gradient-based method) converge faster towards the global minimum than PSO 
 if the initial guess is close to the global minimum. Otherwise, it gets stuck in a local minimum (Figure 2a).
 
 Parameter tuning
 ---------------------
 * Population size
+
 The algorithm works well for a small number of particles n=10.
 
 * Weight factor
@@ -153,3 +154,35 @@ Below is the result for the Ackley function after implementing the adaptive weig
 
 We observe that the particles converge faster towards the global minimum with the dynamic weight factor update. 
 There is a better balance between exploration and exploitation.
+
+Complexity
+----------
+
+* BFGS
+
+The BFGS complexity is relatively low O(n2).
+
+* Nelder-Mead
+
+The Nelder-Mead complexity is low O(1).
+
+* PSO
+
+The velocity update requires three complex multiplications and four complex additions per particle per dimension 
+as well as one complex addition for particle update. For n particles of d dimensions each, this leads to a total 
+of 3 dn complex multiplications and 5 dn complex additions. 
+The computational complexity of PSO is highly dependent on the number of particles but it is considered rather low.
+
+Morever, the computational time of PSO is low. PSO (0.001s) is 2 times faster than BFGS (0.002s) and 16 times faster Nelder-Mead (0.016s).
+
+
+Conclusion
+==========
+
+To conclude, the population based algorithm PSO is a fast and accurate optimisation method with low memory requirements. 
+That is why it is widely used to solve multi-modal and non-differential and proved performant in image processing ( `Ji T.Y ,Lu Z. and Wu Q.H (2007)`_ ).
+
+.. _Ji T.Y ,Lu Z. and Wu Q.H (2007): https://reader.elsevier.com/reader/sd/pii/S0165168407001946?token=E9123A43703914DDCE4FBDAC0806E869156463286E6F0394D5491FC762B07E2C5AD9A9D8AAF1DD6DDE8DFD5B31DF080D
+
+However, PSO suffers from low convergence but techniques such as the adaptive weight factor update used here or penalty methods
+enable to overcome this issue.

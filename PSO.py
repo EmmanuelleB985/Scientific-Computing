@@ -1,33 +1,32 @@
 
 
 from __future__ import print_function
-import ipywidgets as widgets
-from IPython.display import display, HTML
+import os
 import math 
+from numpy.random import rand
 from matplotlib import cm
 import numpy as np
 import matplotlib
 import matplotlib.pyplot as plt
 from mpl_toolkits import mplot3d
 from matplotlib import animation
-import os
 from functions import ackley_function, griewank, schaeffer
 from mpl_toolkits.mplot3d import Axes3D
 import functools
 import time
 from scipy import optimize
-import matplotlib.animation as animation
 from scipy.optimize import minimize
-from numpy.random import rand
-from numpy import exp
-from numpy import sqrt
-from numpy import cos
-from numpy import e
-from numpy import pi
+import matplotlib.animation as animation
+
+
 
 
 
 def optimize(x0, f, m):
+
+	"""
+	Run optimisation using scipy optimisation methods
+	"""
 
 	all_x_i = []
 	all_y_i = []
@@ -43,26 +42,6 @@ def optimize(x0, f, m):
     
 
 	return all_x_i, all_y_i, all_f_i
-
-
-
-
-
-
-
-def timing(f):
-    def wrap(*args):
-        time1 = time.time()
-        ret = f(*args)
-        time2 = time.time()
-        print('%s function took %0.3f ms' % (f.func_name, (time2-time1)*1000.0))
-        return ret
-    return wrap
-
-
-
-
-
 
 
 n_iterations = 19

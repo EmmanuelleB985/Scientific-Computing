@@ -1,21 +1,20 @@
 
 from __future__ import print_function
-
+import os
 import math 
 from matplotlib import cm
 import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits import mplot3d
-import os
 from functions import ackley_function, griewank, schaeffer
 from mpl_toolkits.mplot3d import Axes3D
 import functools
-import time
 from scipy import optimize
-import matplotlib.animation as animation
-
 from scipy.optimize import minimize
+import matplotlib.animation as animation
 from PSO import pso, optimize
+import timeit
+
 
 
 def convergence(n_iterations,func_name=''):
@@ -23,11 +22,10 @@ def convergence(n_iterations,func_name=''):
 	
 	# Limits of the function being plotted   
 	plt.plot((0,n_iterations),(0,0), '--g', label="min$f(x)$")
-
-
 	ax1 = plt.axes()
 	ax1.plot(np.arange(n_iterations),fi,label='Nelder-Mead')
 	ax1.plot(np.arange(len(fi2)),fi2,label='BFGS')
+
 	# Convergence of the best particle 
 	ax1.plot(history['global_best'])
 	plt.legend(['$f$ min','Nelder-Mead','BFGS','PSO','PSO'])
@@ -41,14 +39,14 @@ def convergence(n_iterations,func_name=''):
 
 def visualise(f=None, history=None, bounds=None, minima=None, func_name=''):
 
-    """Visualize the process of optimizing
+    """Visualize optimisation
     # Arguments
     
         func: object function
-        history: dict, object returned from pso above
-        bounds: list, bounds of each dimention
-        minima: list, the exact minima to show in the plot
-        func_name: str, the name of the object function
+        history: particles path and global best from pso
+        bounds: bounds of each dimention
+        minima: the exact minima to show in the plot
+        func_name: name of function
 
     """
 
@@ -111,28 +109,39 @@ def visualise(f=None, history=None, bounds=None, minima=None, func_name=''):
 
 for f in [schaeffer, griewank, ackley_function]:
 
+        start = timeit.timeit()
 
-        history = pso(f, bounds = [[-5,5],[-5,5]], particle_size = 20, inertia = 0.5,w_min = 0.6, w_max = 0.7, n_iterations = 20, func_name = 'Ackley')
+        history = pso(f, bounds = [[-5,5],[-5,5]], particle_size = 20, inertia = 0.5,w_min = 0.6, w_max = 0.7, n_iterations = 20, func_name = '')
+
+
 
         print('global best:',history['global_best'][-1], ', global best position:', history['global_best'][-1])
 
-        visualise(f=f, history=history, bounds=[[-5,5],[-5,5]], minima=[0,0], func_name= 'Ackley') 
+        visualise(f=f, history=history, bounds=[[-5,5],[-5,5]], minima=[0,0], func_name= '') 
 
 
         # initial guess 
         x0=[(-2,2)] 
+
+
 
         for model in ['nelder-mead','bfgs']:
 
             for a in [False, True]:
             
                 if model == 'nelder-mead' and a == False:
+
                 
                     xi,yi,fi = optimize(x0,f,model)
                     
-                if model == 'bfgs' and a == True:
-                    xi2,yi2,fi2 = optimize(x0,f,model)
+
                     
+                if model == 'bfgs' and a == True:
+                    
+
+                    xi2,yi2,fi2 = optimize(x0,f,model)
+        
+            
                     
         #Plot convergence
         convergence(n_iterations = 19,func_name = '')

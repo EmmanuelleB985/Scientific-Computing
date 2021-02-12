@@ -77,11 +77,11 @@ Thus, PSO is a simple, flexible and efficient algorithm compared to other optimi
 <h2>PSO Algorithm<a class="headerlink" href="#pso-algorithm" title="Permalink to this headline">¶</a></h2>
 <p>PSO algorithm searches the space of an objective function by adjusting the trajectories of individual agents, called particles, as the piecewise paths formed by positional vectors
 in a quasi-stochastic manner. Each particle is attracted toward the position of the current global best  and its own best location in history, while at the same time it has a tendency
-to move randomly. When a particle finds a location that is better than any previously found locations, updates that location as the new current best for particle i.
+to move randomly. When a particle finds a location that is better than any previously found locations, PSO updates that location as the new current best for particle i.
 There is a current best for all n particles at any time t during iterations. The aim is to find the global best among all the current best solutions until the objective no longer improves
 or after a certain number of iterations.</p>
 <img alt="_images/PSO_picture.png" src="_images/PSO_picture.png" />
-<p>The update of particle’s position is given by:</p>
+<p>The update of the particle position is given by:</p>
 <blockquote>
 <div><div class="math notranslate nohighlight">
 \[x^{i}_{k} + 1 =  x^{i}_{k} + v^{i}_{k+1} + ∆t\]</div>
@@ -127,7 +127,7 @@ or after a certain number of iterations.</p>
 </ul>
 <img alt="_images/PSO_schaeffer.gif" src="_images/PSO_schaeffer.gif" />
 <img alt="_images/Convergence_Schaeffer.png" src="_images/Convergence_Schaeffer.png" />
-<p>We observe that Nedler-Mead and BFGS converge faster towards the global minimum than PSO
+<p>We observe that Nelder-Mead (direct derivative free algorithm) and BFGS (gradient-based method) converge faster towards the global minimum than PSO
 if the initial guess is close to the global minimum. Otherwise, it gets stuck in a local minimum (Figure 2a).</p>
 <div class="section" id="parameter-tuning">
 <h2>Parameter tuning<a class="headerlink" href="#parameter-tuning" title="Permalink to this headline">¶</a></h2>
@@ -168,6 +168,32 @@ will be disrupted ( <a class="reference external" href="https://ieeexplore.ieee.
 <p>We observe that the particles converge faster towards the global minimum with the dynamic weight factor update.
 There is a better balance between exploration and exploitation.</p>
 </div>
+<div class="section" id="complexity">
+<h2>Complexity<a class="headerlink" href="#complexity" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>BFGS</p></li>
+</ul>
+<p>The BFGS complexity is relatively low O(n2).</p>
+<ul class="simple">
+<li><p>Nelder-Mead</p></li>
+</ul>
+<p>The Nedler-Mead complexity is low O(1).</p>
+<ul class="simple">
+<li><p>PSO</p></li>
+</ul>
+<p>The velocity update requires three complex multiplications and four complex additions per particle per dimension
+as well as one complex addition for particle update. For n particles of d dimensions each, this leads to a total
+of 3 dn complex multiplications and 5 dn complex additions.
+The computational complexity of PSO is highly dependent on the number of particles but it is considered rather low.</p>
+<p>Morever, the computational time of PSO is low. PSO (0.001s) is 2 times faster than BFGS (0.002s) and 16 times faster Nelder-Mead (0.016s).</p>
+</div>
+</div>
+<div class="section" id="conclusion">
+<h1>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h1>
+<p>To conclude, the population based algorithm PSO is a fast and accurate optimisation method with low memory requirements.
+That is why it is widely used to solve multi-modal and non-differential and proved performant in image processing ( <a class="reference external" href="https://reader.elsevier.com/reader/sd/pii/S0165168407001946?token=E9123A43703914DDCE4FBDAC0806E869156463286E6F0394D5491FC762B07E2C5AD9A9D8AAF1DD6DDE8DFD5B31DF080D">Ji T.Y ,Lu Z. and Wu Q.H (2007)</a> ).</p>
+<p>However, PSO suffers from low convergence but techniques such as the adaptive weight factor update used here or penalty methods
+enable to overcome this issue.</p>
 </div>
 
 
@@ -199,8 +225,10 @@ There is a better balance between exploration and exploitation.</p>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="#results">Results</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#parameter-tuning">Parameter tuning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#complexity">Complexity</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="#conclusion">Conclusion</a></li>
 </ul>
 
 <div class="relations">

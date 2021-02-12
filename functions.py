@@ -57,8 +57,6 @@ def schaeffer(x):
 
 	return y 
 	
-
-	
 X = np.linspace(-5, 5, 50)    
 Y = np.linspace(-5, 5, 50) 
 
@@ -67,9 +65,6 @@ xg, yg = np.meshgrid(X, Y)
 
 # Plot the function 
 fig = plt.figure()
-
-
-#plt.plot(X,schaeffer([X,X]))
 
 #3d plotting
 ax = fig.gca(projection='3d')
