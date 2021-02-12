@@ -1,6 +1,6 @@
 # Scientific-Computing
 Welcome to the derivative free optimisation project.
-Please read [file:///home/sabsr3/Documents/Scientific-Computing/documentation/build/html/index.html] for further documentation.
+Please read [here] (https://drive.google.com/file/d/198Fbp5WVVqxR8k3jFGKC_7v5KhLUcbDi/view?usp=sharing) for further documentation.
 # Prerequisites
 
 Ensure you have met the following requirements
@@ -10,7 +10,7 @@ Ensure you have met the following requirements
 
 # Project Installation
 
-To install the PK project, follow the steps:
+To install the project, follow the steps:
 
 # Linux and MacOS:
 
