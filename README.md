@@ -1,6 +1,7 @@
 # Scientific-Computing
 Welcome to the derivative free optimisation project.
-Please read [here] (https://drive.google.com/file/d/198Fbp5WVVqxR8k3jFGKC_7v5KhLUcbDi/view?usp=sharing) for further documentation.
+
+Please click [here] (https://modellingscientific-computing.readthedocs.io/en/latest/) for the project documentation.
 # Prerequisites
 
 Ensure you have met the following requirements
